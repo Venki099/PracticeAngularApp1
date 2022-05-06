@@ -1,0 +1,143 @@
+<div
+  class="container"
+  style="
+    align-items: center;
+    width: 400px;
+    border: 1px solid black;
+    padding: 40px;
+    border-radius: 15px;
+    background-color: aquamarine;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  "
+>
+  <div class="card-body">
+    <h4 class="card-title">User Regestration</h4>
+    <br />
+
+    <form [formGroup]="myForm" novalidate>
+      <div class="form-group">
+        <label>User Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="userName"
+          [ngClass]="{
+            'is-invalid':
+              userName.errors && (userName.touched || userName.dirty),
+            'is-valid': userName.valid
+          }"
+        />
+        <div class="invalid-feedback">
+          <!--*ngIf Directive-->
+          <strong
+            *ngIf="userName.errors?.required"
+            style="color: red; font-size: x-small"
+            >User Name is required</strong
+          >
+          <strong *ngIf="userName.errors?.minlength"
+            >User Name length must be greater than
+            {{ userName.errors?.minlength.requiredLength }} character.
+            {{
+              userName.errors?.minlength.requiredLength -
+                userName.errors?.minlength.actualLength
+            }}
+            more character required.
+          </strong>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>User Email</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="userEmail"
+          [ngClass]="{
+            'is-invalid':
+              userEmail.errors && (userEmail.touched || userEmail.dirty),
+            'is-valid': userEmail.valid
+          }"
+        />
+        <div class="invalid-feedback">
+          <!-- <strong> Enter proper email</strong> -->
+          <strong
+            *ngIf="userEmail.errors?.pattern"
+            style="color: red; font-size: small"
+          >
+            User Email pattern is required</strong
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid':
+              password.errors && (password.touched || password.dirty)
+          }"
+        />
+        <div class="invalid-feedback">
+          <strong
+            *ngIf="password.errors?.pattern"
+            style="color: red; font-size: small"
+          >
+            Pass pattern is required</strong
+          >
+          <strong
+            *ngIf="password.errors?.required"
+            style="color: red; font-size: x-small"
+          >
+            Pass is required</strong
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input
+          type="confirmpassword"
+          class="form-control"
+          formControlName="confirmpassword"
+          [ngClass]="{
+            'is-invalid':
+              confirmpassword.errors &&
+              (confirmpassword.touched || confirmpassword.dirty)
+          }"
+        />
+        <div class="invalid-feedback">
+          <!-- <strong>Password did not match</strong> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlname="phoneNumber"
+          [ngClass]="{
+            'is-invalid':
+              phoneNumber.errors && (phoneNumber.touched || phoneNumber.dirty)
+          }"
+        />
+        <div class="invalid-feedback">
+          <div
+            *ngIf="phoneNumber.touched && phoneNumber.invalid"
+            class="alert alert-danger"
+          >
+            <div *ngIf="phoneNumber.errors.required">
+              Mobile Number is required.
+            </div>
+            <div *ngIf="phoneNumber.errors.pattern">
+              Please, Enter 10 digit Mobile Number.
+            </div>
+          </div>
+        </div>
+      </div>
+      <br /><br />
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-default">Reset</button>
+    </form>
+  </div>
+</div>
